@@ -2,7 +2,9 @@
 """
 Created on Mon Jan 23 18:51:38 2023
 
-@author: mrsag
+@author: Sagar Dam
+
+This code takes two images (of same dimensions) as input and gives the overlapped/ superimposed image as a ratio of 50:50 
 """
 
 import numpy as np
