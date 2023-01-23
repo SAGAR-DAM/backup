@@ -50,4 +50,5 @@ for i in range(matrix.shape[0]):
 #print(matrix)
 
 plt.figure(figsize=(30,20))
+plt.axis('off')
 plt.imshow(matrix)
