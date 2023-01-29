@@ -16,7 +16,7 @@ from PIL import Image, ImageDraw
 from scipy.optimize import curve_fit as fit
 
 # Load the image
-image_path='D:\\data Lab\\quantel focal spot measurement\\cropped image\\2.png'
+image_path='D:\\data Lab\\quantel focal spot measurement\\cropped image\\1.png'
 image = io.imread(image_path)
 image2 = Image.open(image_path)
 
@@ -27,7 +27,7 @@ image2 = Image.open(image_path)
 # for image 3: [106,118]
 # for image 4: [119,113]
 
-point=[117,126]    #The point for which the linecut is needed.
+point=[115,115]    #The point for which the linecut is needed.
 
 #####################################################################################
 radius=80          # the radius of the circle in which the linecuts are drawn
@@ -42,7 +42,7 @@ boundary_distances=[x,y,X-x,Y-y]    # distances of boundary from the given point
 #radius=min(boundary_distances)
 
 #####################################################################################
-theta_degree=np.linspace(0,170,18)    # angels, for which the linecuts will be drawn
+theta_degree=np.linspace(0,150,6)    # angels, for which the linecuts will be drawn
 theta=theta_degree*np.pi/180          # angels in radian
 FWHM=[]                 
 ####################################################################################
@@ -109,10 +109,11 @@ for i in range(len(theta)):
     plt.plot(fit_linecut,label='Gaussian fit')
     plt.legend()
     plt.title("Normalized Linecut at:\npixel no: (%d"%x+",%d"%y+")    theta=%d"%(theta_degree[i]))
-    plt.xlabel('start: %d'%start_point[0]+',%d'%start_point[1]+'      end: %d'%end_point[0]+',%d'%end_point[1]+"\n FWHM = %f"%fwhm)
+    plt.xlabel('start: (%d'%start_point[0]+',%d'%start_point[1]+')      end: (%d'%end_point[0]+',%d'%end_point[1]+")\n FWHM = %f"%fwhm)
     plt.show()
 
 image2=np.asarray(image2)
 plt.imshow(image2)
+plt.xlabel("Average FWHM from all directions: %f"%np.mean(FWHM))
 
 print("Average FWHM from all directions: ", np.mean(FWHM))
