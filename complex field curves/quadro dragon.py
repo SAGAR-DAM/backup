@@ -54,9 +54,38 @@ if __name__ == "__main__":
     # Pull the pen down – drawing when moving.
     pendown()		
 
-    level=12
+    level=10
     
     dragon(length,level,0)
+    penup()
+    right(135+level*45)
+    forward(length)
+    right(135-level*45)
+    left(90)
+    pendown()
+    
+    pencolor("red")
+    dragon(length,level,0)
+    penup()
+    right(135+level*45)
+    forward(length)
+    right(135-level*45)
+    left(90)
+    pendown()
+    
+    
+    pencolor("green")
+    dragon(length,level,0)
+    penup()
+    right(135+level*45)
+    forward(length)
+    right(135-level*45)
+    left(90)
+    pendown()
+    
+    pencolor("blue")
+    dragon(length,level,0)
+    
     hideturtle()
     # To control the closing windows of the turtle
     mainloop()
