@@ -70,3 +70,8 @@ def animate(i):
 ani = animation.FuncAnimation(fig, animate, range(1, len(states)),
                               interval=dt*1000, blit=True, init_func=init)
 plt.show()
+
+
+for __var__ in dir():
+    exec('del '+ __var__)
+    del __var__

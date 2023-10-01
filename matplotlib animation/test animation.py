@@ -9,8 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
-import matplotlib
-matplotlib.rcParams['figure.dpi']=300 # highres display
+#import matplotlib
+#matplotlib.rcParams['figure.dpi']=300 # highres display
+
 xdata=np.linspace(-5,5,200)
 
 x=[]

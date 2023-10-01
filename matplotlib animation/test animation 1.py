@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
 # Parameters
-G =  5.81  # acceleration due to gravity (m/s^2)
+G =  9.81  # acceleration due to gravity (m/s^2)
 L1 = 1.0  # length of the first pendulum (m)
 L2 = 2.0  # length of the second pendulum (m)
 M1 = 2.0  # mass of the first pendulum (kg)

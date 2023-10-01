@@ -20,3 +20,7 @@ def update(frame):
 ani = FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 128),
                     init_func=init, blit=True)
 plt.show()
+
+for __var__ in dir():
+    exec('del '+ __var__)
+    del __var__
