@@ -11,23 +11,17 @@ from scipy.integrate import odeint
 from PIL import Image
 import pygame
 
-import sys
+import matplotlib
+matplotlib.rcParams['figure.dpi']=300 # highres display
+##########################################################################################
+##########################################################################################
+'''  All Required parameters and defined objects (Double pendulum) '''
+##########################################################################################
+##########################################################################################
 
-##########################################################################################
-##########################################################################################
-'''  All Required parameters and defined objects (Double pendulum '''
-##########################################################################################
-##########################################################################################
+g=981
+t=np.linspace(0,30,30001)
 
-g=200
-t=np.linspace(0,100,10001)
-
-
-##########################################################################################
-##########################################################################################
-'''  The double pendulum class anf the solution '''
-##########################################################################################
-##########################################################################################
 
 class double_pendulum:
     def __init__(self,m1,m2,L1,L2,theta1,theta2,theta1_dot,theta2_dot):
@@ -63,8 +57,16 @@ class double_pendulum:
         sol=sol.T
         self.sol=sol
     
-    
+##########################################################################################
+##########################################################################################
+'''  defining the pendulums with initial conditions '''
+##########################################################################################
+##########################################################################################
+
 p1=double_pendulum(m1=40, m2=10, L1=120, L2=150, theta1=np.pi, theta2=np.pi, theta1_dot=0.01, theta2_dot=0.01)
+p2=double_pendulum(m1=40, m2=10, L1=120, L2=150, theta1=np.pi, theta2=np.pi, theta1_dot=0.0101, theta2_dot=0.01)
+p=[p1]#,p2]#,p3]       # add the pendulums you want the animation for
+savegif=False      # True if you want to save the gif. False if not.
 
 plt.plot(t,p1.sol[0],'k-')
 plt.plot(t,p1.sol[1],'r--')
@@ -100,8 +102,6 @@ colors=[white,red,green,blue,red1,green1,blue1,yellow,magenta,cyan]
 len_c=len(colors)
 
 
-p=[p1]#,p2,p3]       # add the pendulums you want the animation for
-savegif=False      # True if you want to save the gif. False if not.
 
 ##########################################################################################
 ##########################################################################################
@@ -153,6 +153,7 @@ while running:
                 pygame_image = pygame.surfarray.array3d(screen)
                 pil_image = Image.fromarray(pygame_image)
                 pil_image = pil_image.rotate(-90, expand=True)
+                pil_image=pil_image.transpose(Image.FLIP_LEFT_RIGHT)
                 
                 # Append the frame to the list
                 frames.append(pil_image)
@@ -160,7 +161,7 @@ while running:
         running=False
     j+=1
     pygame.display.flip()
-    clock.tick(150)
+    clock.tick(1000)
     
 if(savegif==True):
     # Save the list of frames as a GIF
@@ -168,8 +169,11 @@ if(savegif==True):
 
 
 pygame.quit()
-sys.exit()
 
 for __var__ in dir():
     exec('del '+ __var__)
     del __var__
+    
+import sys
+sys.exit()
+
