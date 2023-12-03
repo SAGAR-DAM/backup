@@ -17,6 +17,11 @@ root = np.array(root)
 roots = len(root)
 colors = np.linspace(0, 1, order)
 
+
+print("Roots:")
+for i in range(len(root)):
+    print(f"z{i+1}:    {root[i]: .3f}")
+    
 def f(z):
     val = z**order - 1
     return val
@@ -75,14 +80,17 @@ Y=output.shape[1]
 
 output=np.flip(output,axis=0)
 
-plt.imshow(output,extent=[min(x),max(x),min(y),max(y)])
+plt.imshow(output,cmap="jet",extent=[min(x),max(x),min(y),max(y)])
 for i in range(len(root)):
     if(abs(root[i].real)<=max(x) and abs(root[i].imag)<=max(y) ):
         plt.scatter(root[i].real,root[i].imag, color='red', marker='o')
         plt.text(root[i].real,root[i].imag, r'z$_{%d}$'%(1+i), color='white', fontsize=10, ha='left', va='bottom')
 plt.grid(color="blue",linewidth=0.5)
-plt.xlabel("Re(z)")
-plt.ylabel("Im(z")
+plt.title(r"NEWTON'S FRACTAL $\ \ by\ \$\alpha\widetilde g\alpha R$")
+plt.xlabel("Re(z)",fontsize=7)
+plt.ylabel("Im(z)",fontsize=7)
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
 plt.show()
 
-print("Time taken:   ",time.time()-t_start)
+print("\n\nTime taken:   ",time.time()-t_start)

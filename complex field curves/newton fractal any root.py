@@ -9,7 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import concurrent.futures
 import matplotlib
-import cv2
 import time
 
 
@@ -28,11 +27,15 @@ def create_random_root(n):
 
 root = [0.5+0.35j, -0.9+0.35j,-0.45-0.4125j,-0.4+0.9j,0.65-0.48j]
 #root = [0.5*np.exp(1j * i * 2 * np.pi / 4) for i in range(4)]
-#root=create_random_root(5)
+#root=create_random_root(6)
 
 iteration = 50
 root=np.array(root)
 colors = np.linspace(0, 1, len(root))
+
+print("Roots:")
+for i in range(len(root)):
+    print(f"z{i+1}:    {root[i]: .3f}")
 
 def f(z):
     val=1
@@ -98,21 +101,20 @@ output = colour_the_complex_plane(z, root, colors)
 X=output.shape[0]
 Y=output.shape[1]
 
-# for i in range(len(root)):
-#     if(abs(root[i].real)<=max(x) and abs(root[i].imag)<=max(y) ):
-#         output=cv2.circle(output,(int(X//2+root[i].real*X/(2*max(x))),int(Y//2+root[i].imag*Y/(2*max(y)))),10,(colors[-1-i]),-1)
-#         output=cv2.circle(output,(int(X//2+root[i].real*X/(2*max(x))),int(Y//2+root[i].imag*Y/(2*max(y)))),5,(colors[i]),-1)
 
 output=np.flip(output,axis=0)
 
-plt.imshow(output,extent=[min(x),max(x),min(y),max(y)])
+plt.imshow(output,cmap='jet',extent=[min(x),max(x),min(y),max(y)])
 for i in range(len(root)):
     if(abs(root[i].real)<=max(x) and abs(root[i].imag)<=max(y) ):
         plt.scatter(root[i].real,root[i].imag, color='red', marker='o')
         plt.text(root[i].real,root[i].imag, r'z$_{%d}$'%(1+i), color="white", fontsize=10, ha='left', va='bottom')
+plt.title(r"NEWTON'S FRACTAL $\ \ by\ \$\alpha\widetilde g\alpha R$")
 plt.grid(color="blue",linewidth=0.5)
-plt.xlabel("Re(z)")
-plt.ylabel("Im(z")
+plt.xlabel("Re(z)",fontsize=7)
+plt.ylabel("Im(z)",fontsize=7)
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
 plt.show()
 
-print("Time taken:   ",time.time()-t_start)
+print("\n\nTime taken:   ",time.time()-t_start)
